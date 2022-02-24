@@ -2,26 +2,95 @@
 const inquirer = require('inquirer');
 const generateMarkdown = require("./utils/generateMarkdown");
 const fs = require('fs');
+const express = require('express');
 
 // TODO: Create an array of questions for user input
-const questions = [
+const promptUser = () => {
+    return inquirer.prompt([ 
     {
         type: 'input',
         name: 'title',
-        message: 'What\'s the title of your project?'
+        message: 'What\'s the title of your project?',
+        validate: titleInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log('Please enter a title!');
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'description',
-        message: 'What/s the description of your project?'
+        message: 'What/s the description of your project?',
+        validate: descriptionInput => {
+            if (descriptionInput) {
+                return true;
+            } else {
+                console.log('Please enter a description!');
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'installation', 
-        message: 'What are the installation requirements?'
+        message: 'What are the installation requirements?',
+        validate: installationInput => {
+            if (installationInput) {
+                return true;
+            } else {
+                console.log('Please enter installation requirements!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'usage information',
+        message: 'What are the usage information?',
+        validate: usageInput => {
+            if (usageInput) {
+                return true;
+            } else {
+                console.log('Please enter usage information!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'contribution',
+        message: 'What are the contribution guidelines?',
+        validate: contributionInput => {
+            if (contributionInput) {
+                return true;
+            } else {
+                console.log('Please enter the contribution guidelines!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'testing',
+        message: 'What are the test instructions?',
+        validate: testingInput => {
+            if (testingInput) {
+                return true;
+            } else {
+                console.log('Please enter the test instructions!');
+                return false;
+            }
+        }
+    },
+    {
+        
     }
 // for the license, use a list and give the user 4 choices
-];
+]);
+};
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
@@ -38,5 +107,6 @@ function init() {
    })
 }
 
+
 // Function call to initialize app
-init();
+promptUser();
